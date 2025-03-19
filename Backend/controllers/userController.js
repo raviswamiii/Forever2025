@@ -3,6 +3,10 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const validator = require("validator");
 
+const createToken = (id) => {
+    return jwt.sign({id}, process.env.JWT_SECRET)
+}
+
 const registerUser = async (req, res) => {
     try {
         const {name, email, password} = req.body;
@@ -32,9 +36,7 @@ const registerUser = async (req, res) => {
 
         const user = await newUser.save()
          
-        const createToken = (id) => {
-            return jwt.sign({id}, process.env.JWT_SECRET)
-        }
+        
 
         const token = createToken(user._id)
 
@@ -46,4 +48,28 @@ const registerUser = async (req, res) => {
     }
 }
 
-module.exports = {registerUser}
+const loginUser = async (req, res) => {
+    try {
+        const {email, password} = req.body;
+        const user = await userModel.findOne({email});
+
+    if(!user){
+        res.json({success: false, message: "user does not exist."})
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if(isMatch) {
+        const token = createToken(user._id)
+        res.json({success: true, token})
+    } else{
+        res.json({success: false, message: "invalid credentials"})
+    }
+
+    } catch (error) {
+        console.log(error)
+        res.json({success: false, message: message.error})
+    }
+} 
+
+module.exports = {registerUser, loginUser}

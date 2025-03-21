@@ -1,6 +1,6 @@
 const express = require("express");
 const upload = require("../Middleware/multer.js")
-const {addProduct} = require("../controllers/productController.js")
+const {addProduct, listProduct, removeProduct, singleProduct} = require("../controllers/productController.js")
 
 const productRouter = express.Router();
 
@@ -10,5 +10,9 @@ productRouter.post("/add", upload.fields([
     {name: "image3", maxCount: 1},
     {name: "image4", maxCount: 1},
 ]), addProduct);
+
+productRouter.post("/list", listProduct);
+productRouter.post("/remove", removeProduct);
+productRouter.post("/single", singleProduct);
 
 module.exports = productRouter;

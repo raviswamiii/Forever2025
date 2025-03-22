@@ -61,15 +61,30 @@ const loginUser = async (req, res) => {
 
     if(isMatch) {
         const token = createToken(user._id)
-        res.json({success: true, token})
+        return res.json({success: true, token})
     } else{
-        res.json({success: false, message: "invalid credentials"})
+        return res.json({success: false, message: "invalid credentials"})
     }
 
     } catch (error) {
         console.log(error)
-        res.json({success: false, message: message.error})
+        res.json({success: false, message: error.message})
     }
 } 
 
-module.exports = {registerUser, loginUser}
+const adminLogin = async (req, res) => {
+    try {
+        const {email, password} = req.body;
+        if (email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD) {
+            const token = jwt.sign(email+password, process.env.JWT_SECRET);
+            res.json({success: true, message: token})
+        } else {
+            res.json({success: false, message: "Invalid credentials."})
+        }
+    } catch (error) {
+        console.log(error);
+        res.json({success: false, message: error.message})
+    }
+}
+
+module.exports = {registerUser, loginUser, adminLogin}

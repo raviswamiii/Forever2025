@@ -32,7 +32,7 @@ export const App = () => {
           <div className="flex">
             <Sidebar />
             <Routes>
-              <Route path="/add" element={<Add />} />
+              <Route path="/add" element={<Add token={token}/>} />
               <Route path="/list" element={<List />} />
               <Route path="/orders" element={<Orders />} />
             </Routes>

@@ -2,16 +2,16 @@ const jwt = require("jsonwebtoken");
 
 const adminAuth = async (req, res, next) => {
     try {
-        const {token} = req.headers;
+        const {token} = req.headers
 
     if(!token) {
-        res.json({success: false, message: "Not authorized login again."})
+        return res.json({success: false, message: "Not authorized login again."})
     }
 
     const token_decode = jwt.verify(token, process.env.JWT_SECRET);
 
     if (token_decode !== process.env.ADMIN_EMAIL + process.env.ADMIN_PASSWORD) {
-        res.json({success: false, message: "Not authorized login again."})
+         return res.json({success: false, message: "Not authorized login again."})
     } 
 
     next()

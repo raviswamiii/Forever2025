@@ -12,6 +12,8 @@ import { ToastContainer } from "react-toastify";
 
 export const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
+export const currency = "$"
+
 export const App = () => {
   const [token, setToken] = useState(localStorage.getItem("token")?localStorage.getItem("token") : "");
 
@@ -32,7 +34,7 @@ export const App = () => {
             <Sidebar />
             <Routes>
               <Route path="/add" element={<Add token={token}/>} />
-              <Route path="/list" element={<List />} />
+              <Route path="/list" element={<List token={token} />} />
               <Route path="/orders" element={<Orders />} />
             </Routes>
           </div>

@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Title } from "./Title";
-import { products } from "../assets/assets";
+// import { products } from "../assets/assets";
 import { ProductItem } from "./ProductItem";
+import { ShopContext } from "../context/ShopContext";
 export const LatestCollection = () => {
+  const {products} = useContext(ShopContext)
   const [latestProducts, setLatestProducts] = useState([]);
 
   useEffect(() => {
     setLatestProducts(products.slice(0, 10));
-  }, []);
+  }, [products]);
   return (
     <div className="mt-16">
       <div className="flex flex-col gap-2 items-center mb-8 text-3xl">

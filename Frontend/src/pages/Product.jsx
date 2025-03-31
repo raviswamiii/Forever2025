@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ShopContext } from "../context/ShopContext";
-import { assets, products } from "../assets/assets";
+import { assets, } from "../assets/assets";
 import { RelatedProducts } from "../components/RelatedProducts";
 import { useParams } from "react-router-dom";
 
@@ -8,7 +8,7 @@ export const Product = () => {
   const [productData, setProductData] = useState();
   const [size, setSize] = useState();
   const {productId} = useParams()
-  const { currency, addToCart } = useContext(ShopContext);
+  const { currency, addToCart, products } = useContext(ShopContext);
   const allProducts = products;
 
   const fetchProductData = () => {
@@ -21,7 +21,7 @@ export const Product = () => {
 
   useEffect(() => {
     fetchProductData();
-  }, [productId]);
+  }, [productId, products]);
   return productData ? (
     <div className="border-t pt-10">
       <div className="flex gap-11 ">

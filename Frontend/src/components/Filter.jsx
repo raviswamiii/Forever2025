@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AllCollection } from "./AllCollection";
-import { products } from "../assets/assets";
+// import { products } from "../assets/assets";
 import { ShopContext } from "../context/ShopContext";
 
 export const Filter = () => {
   const [category, setCategory] = useState([]);
   const [subCategory, setSubCategory] = useState([]);
-  const { filteredProducts, setFilteredProducts } = useContext(ShopContext);
+  const { filteredProducts, setFilteredProducts, products } = useContext(ShopContext);
   
   const categoryFunction = (e) => {
     if (!category.includes(e.target.value)) {
@@ -47,7 +47,7 @@ export const Filter = () => {
 
   useEffect(() => {
     applyFilter();
-  }, [category, subCategory]);
+  }, [category, subCategory, products]);
   
   return (
     <div className="flex gap-10 pt-10">

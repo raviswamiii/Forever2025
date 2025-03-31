@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Title } from "./Title";
-import { products } from "../assets/assets";
+// import { products } from "../assets/assets";
 import { ProductItem } from "./ProductItem";
+import { ShopContext } from "../context/ShopContext";
 
 export const BestSeller = () => {
+  const {products} = useContext(ShopContext)
   const [bestSeller, setBestSeller] = useState([]);
   const allProducts = products;
   const bestProducts = allProducts.filter((item) => item.bestseller);
 
   useEffect(() => {
     setBestSeller(bestProducts.slice(0, 5));
-  }, []);
+  }, [products]);
 
   return (
     <div className="mt-16">

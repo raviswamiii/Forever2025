@@ -1,11 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Title } from "./Title";
 import { ShopContext } from "../context/ShopContext";
-import { products } from "../assets/assets";
 import { ProductItem } from "./ProductItem";
 
 export const RelatedProducts = ({ category, subCategory }) => {
-  const { cartItems } = useContext(ShopContext);
+  const { products } = useContext(ShopContext);
   const [relatedProducts, setRelatedProducts] = useState([]);
 
   const filterRelatedProducts = () => {
@@ -20,7 +19,6 @@ export const RelatedProducts = ({ category, subCategory }) => {
   useEffect(() => {
     filterRelatedProducts();
   }, [category, subCategory]);
-  console.log(relatedProducts);
 
   return (
     <div className="mt-20 flex flex-col items-center ">

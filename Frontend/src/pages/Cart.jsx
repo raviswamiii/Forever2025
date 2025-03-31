@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
-import { assets, products } from "../assets/assets";
+import { assets } from "../assets/assets";
 import { ShopContext } from "../context/ShopContext";
 import { Title } from "../components/Title";
 import { CartTotal } from "../components/CartTotal";
 
 export const Cart = () => {
-  const { cartItems, currency, updateQuantity, navigate } =
+  const { cartItems, currency, updateQuantity, navigate, products } =
     useContext(ShopContext);
   const [productData, setProductData] = useState([]);
   const allProducts = products;
@@ -28,8 +28,7 @@ export const Cart = () => {
 
   useEffect(() => {
     fetchCartItems();
-  }, [cartItems]);
-  console.log(cartItems);
+  }, [cartItems, products]);
 
   return (
     <div>

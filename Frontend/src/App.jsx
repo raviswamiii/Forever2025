@@ -1,6 +1,6 @@
 import React from "react";
 import { Navbar } from "./components/Navbar";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { Collection } from "./pages/Collection";
 import { About } from "./pages/About";
@@ -11,11 +11,16 @@ import { Login } from "./pages/Login";
 import { Product } from "./pages/Product";
 import { PlaceOrder } from "./pages/PlaceOrder";
 import { Orders } from "./pages/Orders";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 export const App = () => {
+  const location = useLocation();
+
   return (
     <div className="px-[8vw]">
-      <Navbar />
+      <ToastContainer />
+      {location.pathname !== "/login" && <Navbar />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/collection" element={<Collection />} />
@@ -26,7 +31,7 @@ export const App = () => {
         <Route path="/product/:productId" element={<Product />} />
         <Route path="/place-order" element={<PlaceOrder />} />
         <Route path="/orders" element={<Orders />} />
-        </Routes>
+      </Routes>
       <Footer />
     </div>
   );

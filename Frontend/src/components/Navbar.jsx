@@ -4,7 +4,14 @@ import { NavLink, Link } from "react-router-dom";
 import { ShopContext } from "../context/ShopContext";
 
 export const Navbar = () => {
-  const { setVisible, getCartCount} = useContext(ShopContext)
+  const { setVisible, getCartCount, setToken, token, setCartItems, navigate} = useContext(ShopContext);
+
+  const logout = () => {
+    navigate("/login")
+    localStorage.removeItem("token")
+    setToken('')
+    setCartItems({})
+  }
   return (
     <div className="flex justify-between items-center py-5">
       <NavLink to={"/"}>
@@ -34,18 +41,17 @@ export const Navbar = () => {
         </Link>
         
         <div className="relative group">
-          <Link to={"/login"}>
           <img
+          onClick={()=> token ? null : navigate("/login")}
             className="h-6 cursor-pointer"
             src={assets.profile_icon}
             alt=""
           />
-          </Link>
           <div className=" absolute right-0 pt-2 hidden group-hover:block">
             <div className="bg-gray-400 px-4 py-2 rounded w-[8vw]">
-              <p className="text-sm mb-1 hover:text-gray-300">My Profle</p>
-              <p className="text-sm mb-1 hover:text-gray-300">Orders</p>
-              <p className="text-sm mb-1 hover:text-gray-300">Logout</p>
+              <p className="text-sm mb-1 hover:text-gray-300 cursor-pointer">My Profle</p>
+              <p onClick={()=>navigate("/orders")} className="text-sm mb-1 hover:text-gray-300 cursor-pointer">Orders</p>
+              <p onClick={logout} className="text-sm mb-1 hover:text-gray-300 cursor-pointer">Logout</p>
             </div>
           </div>
         </div>

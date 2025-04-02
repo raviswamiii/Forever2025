@@ -11,6 +11,7 @@ export const Cart = () => {
   const allProducts = products;
 
   const fetchCartItems = () => {
+   if(products.length > 0) {
     let emptyArray = [];
     for (const items in cartItems) {
       for (const item in cartItems[items]) {
@@ -25,6 +26,7 @@ export const Cart = () => {
     }
     setProductData(emptyArray);
   };
+   }
 
   useEffect(() => {
     fetchCartItems();

@@ -4,46 +4,134 @@ import { CartTotal } from "../components/CartTotal";
 import { assets } from "../assets/assets";
 import { Link } from "react-router-dom";
 import { ShopContext } from "../context/ShopContext";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 export const PlaceOrder = () => {
   const [currentState, setCurrentState] = useState("cod");
-  const { navigate } = useContext(ShopContext);
+  const { navigate, backend_url, cartItems, products, getCartAmount, delivery_fee, token, setCartItems } =
+    useContext(ShopContext);
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    street: "",
+    city: "",
+    state: "",
+    zipcode: "",
+    country: "",
+    phone: "",
+  });
+
+  const onChangeHandler = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    setFormData((data) => ({ ...data, [name]: value }));
+  };
+
+  const onSubmitHandler = async (e) => {
+    e.preventDefault();
+    console.log("Button clicked")
+    try {
+      let orderItems = [];
+      for (const items in cartItems) {
+        for (const item in cartItems[items]) {
+          if (cartItems[items][item] > 0) {
+            const itemInfo = structuredClone(products.find((product) => product._id === items));
+            if (itemInfo) {
+              itemInfo.size = item;
+              itemInfo.quantity = cartItems[items][item];
+              orderItems.push(itemInfo)
+            }
+          }
+        }
+      }
+
+      let orderData = {
+        address: formData,
+        items: orderItems,
+        amount: getCartAmount() + delivery_fee
+      }
+  
+      switch (method) {
+        case "cod":
+          const response = await axios.post(backend_url + "/api/order/place", orderData, {headers: {token}})
+          console.log(response.data)
+          if (response.data.success) {
+            setCartItems({})
+          } else {
+            toast.error(response.data.message)
+          }
+          break;
+      
+        default:
+          break;
+      }
+
+      
+    } catch (error) {}
+  };
   return (
     <div className="mt-10">
       <div className="text-2xl mb-10">
         <Title text1={"DELIVERY"} text2={"INFORMATION"} />
       </div>
-      <div className="flex justify-between">
-        <form className="flex flex-col gap-4 w-[36vw]">
+      <form onSubmit={onSubmitHandler} className="flex justify-between">
+        <div className="flex flex-col gap-4 w-[36vw]">
           <div className="flex gap-3">
             <input
+              required
+              onChange={onChangeHandler}
+              name="firstName"
+              value={formData.firstName}
               className="border rounded px-3 py-1 border-gray-300 w-full"
               type="text"
               placeholder="First name"
             />
             <input
+              required
+              onChange={onChangeHandler}
+              name="lastName"
+              value={formData.lastName}
               className="border rounded px-3 py-1 border-gray-300 w-full"
               type="text"
               placeholder="Last name"
             />
           </div>
           <input
+            required
+            onChange={onChangeHandler}
+            name="email"
+            value={formData.email}
             className="border rounded px-3 py-1 border-gray-300 w-full"
             type="email"
             placeholder="Email address"
           />
           <input
+            required
+            onChange={onChangeHandler}
+            name="street"
+            value={formData.street}
             className="border rounded px-3 py-1 border-gray-300 w-full"
             type="text"
             placeholder="Street"
           />
           <div className="flex gap-3">
             <input
+              required
+              onChange={onChangeHandler}
+              name="city"
+              value={formData.city}
               className="border rounded px-3 py-1 border-gray-300 w-full"
               type="text"
               placeholder="City"
             />
             <input
+              required
+              onChange={onChangeHandler}
+              name="state"
+              value={formData.state}
               className="border rounded px-3 py-1 border-gray-300 w-full"
               type="text"
               placeholder="State"
@@ -51,22 +139,34 @@ export const PlaceOrder = () => {
           </div>
           <div className="flex gap-3">
             <input
+              required
+              onChange={onChangeHandler}
+              name="zipcode"
+              value={formData.zipcode}
               className="border rounded px-3 py-1 border-gray-300 w-full"
               type="number"
               placeholder="Zipcode"
             />
             <input
+              required
+              onChange={onChangeHandler}
+              name="country"
+              value={formData.country}
               className="border rounded px-3 py-1 border-gray-300 w-full"
               type="text"
               placeholder="Country"
             />
           </div>
           <input
+            required
+            onChange={onChangeHandler}
+            name="phone"
+            value={formData.phone}
             className="border rounded px-3 py-1 border-gray-300"
             type="number"
             placeholder="Phone"
           />
-        </form>
+        </div>
         <div className="w-[40vw]">
           <CartTotal />
 
@@ -115,16 +215,19 @@ export const PlaceOrder = () => {
             </div>
           </div>
           <div
-            onClick={() => navigate("/orders")}
+            // onClick={() => navigate("/orders")}
             className="flex justify-end"
             to={"/place-order"}
           >
-            <button className="bg-black text-white px-4 py-3 text-sm text-center w-[15vw] mt-10">
+            <button
+              type="submit"
+              className="bg-red-800 text-white px-4 py-3 text-sm text-center w-[15vw] mt-10"
+            >
               PROCEED TO CHECKOUT
             </button>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   );
 };

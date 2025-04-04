@@ -32,7 +32,6 @@ export const PlaceOrder = () => {
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
-    console.log("Button clicked")
     try {
       let orderItems = [];
       for (const items in cartItems) {
@@ -54,12 +53,12 @@ export const PlaceOrder = () => {
         amount: getCartAmount() + delivery_fee
       }
   
-      switch (method) {
+      switch (currentState) {
         case "cod":
           const response = await axios.post(backend_url + "/api/order/place", orderData, {headers: {token}})
-          console.log(response.data)
           if (response.data.success) {
-            setCartItems({})
+            setCartItems({});
+            navigate("/orders")
           } else {
             toast.error(response.data.message)
           }
@@ -69,8 +68,10 @@ export const PlaceOrder = () => {
           break;
       }
 
-      
-    } catch (error) {}
+    } catch (error) {
+      console.log(error)
+      toast.error(error.message)
+    }
   };
   return (
     <div className="mt-10">
@@ -208,7 +209,7 @@ export const PlaceOrder = () => {
                     }`}
                   ></p>
                   <p className="ml-8 text-sm text-gray-500 font-medium">
-                    CAST ON DELIVERY
+                    CASH ON DELIVERY
                   </p>
                 </div>
               </div>
@@ -221,7 +222,7 @@ export const PlaceOrder = () => {
           >
             <button
               type="submit"
-              className="bg-red-800 text-white px-4 py-3 text-sm text-center w-[15vw] mt-10"
+              className="bg-black text-white px-4 py-3 text-sm text-center w-[15vw] mt-10"
             >
               PROCEED TO CHECKOUT
             </button>

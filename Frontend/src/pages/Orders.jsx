@@ -47,7 +47,7 @@ export const Orders = () => {
         <Title text1={"MY"} text2={"ORDERS"} />
       </div>
       <div>
-        {ordersData.slice(1, 4).map((item, index) => {
+        {ordersData.map((item, index) => {
           return (
             <div
               key={index}

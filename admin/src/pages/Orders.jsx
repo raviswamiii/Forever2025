@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { backendUrl } from "../App";
+import { backendUrl, currency } from "../App";
 import { assets } from "../assets/assets";
 
 export const Orders = ({ token }) => {
@@ -13,7 +13,7 @@ export const Orders = ({ token }) => {
 
     try {
       const response = await axios.post(backendUrl + "/api/order/list",{},{headers: { token }});
-      if (response.data.successful) {
+      if (response.data.success) {
         setOrdersData(response.data.orders)
       } else {
         toast.error(response.data.message)
@@ -36,8 +36,8 @@ export const Orders = ({ token }) => {
   useEffect(() => {
     fetchAllOrders();
   }, [token]);
-  return <div>
-    <h3>Order Page</h3>
+  return <div className="px-16 py-8">
+    <h3 className="text-gray-600 mb-2">All Orders</h3>
     <div>
       {
         orders.map((order,index)=> (

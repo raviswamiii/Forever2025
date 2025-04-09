@@ -1,7 +1,8 @@
+const dotenv = require("dotenv");
+dotenv.config();
 const express = require("express");
 const databaseConnection = require("./config/mongodb");
 const app = express();
-const dotenv = require("dotenv");
 const port = process.env.PORT || 3000
 const userRouter = require("./routes/userRoutes");
 const connectCloudinary = require("./config/cloudinary");
@@ -10,7 +11,6 @@ const cors = require("cors");
 const cartRouter = require("./routes/cartRoutes");
 const orderRouter = require("./routes/orderRoute");
 
-dotenv.config();
 databaseConnection();
 connectCloudinary()
 

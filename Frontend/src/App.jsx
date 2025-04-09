@@ -11,6 +11,7 @@ import { Login } from "./pages/Login";
 import { Product } from "./pages/Product";
 import { PlaceOrder } from "./pages/PlaceOrder";
 import { Orders } from "./pages/Orders";
+import { Verify } from "./pages/Verify";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 
@@ -31,6 +32,7 @@ export const App = () => {
         <Route path="/product/:productId" element={<Product />} />
         <Route path="/place-order" element={<PlaceOrder />} />
         <Route path="/orders" element={<Orders />} />
+        <Route path="/verify" element={<Verify />} />
       </Routes>
       <Footer />
     </div>

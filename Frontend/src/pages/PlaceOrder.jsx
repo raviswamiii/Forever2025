@@ -198,17 +198,7 @@ export const PlaceOrder = () => {
                   ></p>
                   <img className="h-5 ml-8" src={assets.stripe_logo} alt="" />
                 </div>
-                <div
-                  onClick={() => setCurrentState("razorpay")}
-                  className="flex items-center border px-3 py-2 cursor-pointer"
-                >
-                  <p
-                    className={`rounded-full p-1.5 border ${
-                      currentState === "razorpay" ? "bg-green-400" : ""
-                    }`}
-                  ></p>
-                  <img className="h-5 ml-8" src={assets.razorpay_logo} alt="" />
-                </div>
+                
                 <div
                   onClick={() => setCurrentState("cod")}
                   className="flex items-center border px-3 py-2 cursor-pointer"

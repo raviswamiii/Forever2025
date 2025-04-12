@@ -22,7 +22,7 @@ export const App = () => {
   }, [token]);
 
   return (
-    <div>
+    <div className="bg-green-400">
       <ToastContainer />
       {token === "" ? (
         <Login setToken={setToken} />

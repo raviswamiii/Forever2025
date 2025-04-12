@@ -19,7 +19,7 @@ export const App = () => {
   const location = useLocation();
 
   return (
-    <div className="px-[8vw]">
+    <div className="px-[8vw] w-full">
       <ToastContainer />
       {location.pathname !== "/login" && <Navbar />}
       <Routes>

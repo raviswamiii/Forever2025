@@ -39,29 +39,29 @@ export const List = ({token}) => {
     fetchProductList();
   }, []);
   return (
-    <div className="px-16 py-8 w-full">
+    <div className="sm:px-16 sm:py-8 p-4 sm:w-full w-[82%]">
       <p className="text-gray-600 mb-2">Products List</p>
-      <div className="grid grid-cols-[1fr_3fr_1fr_1fr_1fr] bg-gray-100 w-full px-2 py-1 text-gray-600 font-semibold text-sm border mb-2">
+      <div className="hidden sm:grid grid-cols-[1fr_3fr_1fr_1fr_1fr] w-full bg-gray-100 px-2 py-1 text-gray-600 font-semibold sm:text-sm text-xs border mb-2">
         <p>Image</p>
         <p>Name</p>
         <p>Category</p>
-        <p>Price</p>
+        <p className="sm:pl-7">Price</p>
         <p>Remove</p>
       </div>
 
       {list.map((item, index) => (
         <div
           key={index}
-          className="border grid grid-cols-[0.5fr_3fr_1fr_1fr_1fr] items-center text-gray-600 p-2 text-sm mb-2"
+          className="border grid sm:grid-cols-[0.5fr_3fr_1fr_1fr_1fr] grid-cols-[1.5fr_2fr_1.5fr_1fr_1fr] items-center text-gray-600 p-2 sm:text-sm mb-2  text-xs leading-[13px]"
         >
-          <img className="w-12" src={item.image[0]} alt="" />
-          <p className="pl-12">{item.name}</p>
-          <p className="pl-12">{item.category}</p>
-          <p className="pl-7">
+          <img className="sm:w-12 w-[13vw]" src={item.image[0]} alt="" />
+          <p className="sm:pl-12">{item.name}</p>
+          <p className="sm:pl-12">{item.category}</p>
+          <p className="sm:pl-12">
             {currency}
             {item.price}
           </p>
-          <p onClick={()=>removeProduct(item._id)} className="pl-7 cursor-pointer">X</p>
+          <p onClick={()=>removeProduct(item._id)} className="sm:pl-7 pl-5 cursor-pointer">X</p>
         </div>
       ))}
     </div>

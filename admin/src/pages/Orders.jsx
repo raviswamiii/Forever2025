@@ -36,7 +36,7 @@ export const Orders = ({ token }) => {
   useEffect(() => {
     fetchAllOrders();
   }, [token]);
-  return <div className="px-16 py-8">
+  return <div className="sm:px-16 sm:py-8 p-4">
     <h3 className="text-gray-600 mb-2">All Orders</h3>
     <div>
       {

@@ -34,7 +34,7 @@ export const Cart = () => {
 
   return (
     <div>
-      <div className="text-2xl mt-14 border-b pb-5">
+      <div className="text-xl sm:mt-14 border-b sm:pb-5">
         <Title text1={"YOUR"} text2={"CART"} />
       </div>
       {productData.map((items, index) => {
@@ -45,18 +45,18 @@ export const Cart = () => {
         return (
           <div
             key={index}
-            className="py-4 border-b flex items-center justify-between pr-16"
+            className="flex justify-between sm:items-center items-end py-2 sm:py-4 border-b"
           >
-            <div className="flex gap-6">
-              <img className="h-[7vw] " src={cartData.image[0]} alt="" />
+            <div className="flex gap-3 sm:gap-6">
+              <img className="h-[20vw] sm:h-auto w-[20vw] sm:w-20" src={cartData.image[0]} alt="" />
               <div className="text-gray-700">
-                <p className="text-lg font-medium mb-4">{cartData.name}</p>
-                <div className="flex gap-5 items-center ">
+                <p className="text-xs sm:text-lg font-medium sm:mb-4 mb-3">{cartData.name}</p>
+                <div className="flex sm:gap-5 gap-3 items-center ">
                   <p>
                     {currency}
                     {cartData.price}
                   </p>
-                  <p className="border px-3 py-1 bg-gray-100">{items.size}</p>
+                  <p className="border sm:px-3 sm:py-1 px-1 py-0 bg-gray-100 text-sm">{items.size}</p>
                 </div>
               </div>
             </div>
@@ -70,25 +70,25 @@ export const Cart = () => {
                       Number(e.target.value)
                     )
               }
-              className="border px-2 py-1 w-[5vw]"
+              className="border max-w-10 sm:max-w-20 px-1 sm:px-2 mr-5 mb-2"
               type="number"
               min={1}
               defaultValue={items.quantity}
             />
             <img
               onClick={() => updateQuantity(items._id, items.size, 0)}
-              className="h-5 cursor-pointer"
+              className="h-5 cursor-pointer mb-2 sm:mr-8"
               src={assets.bin_icon}
               alt=""
             />
           </div>
         );
       })}
-      <div className="flex justify-end mt-20  ">
-        <div className="w-[35vw]">
+      <div className="flex justify-end sm:mt-20 mt-28 ">
+        <div className="sm:w-[35vw] w-full">
           <CartTotal />
-          <div onClick={() => navigate("/place-order")} className="text-end">
-            <button className="bg-black text-white px-4 py-3 text-sm text-center w-[15vw] mt-10">
+          <div className="w-full text-end" onClick={() => navigate("/place-order")}>
+            <button className="bg-black text-white text-sm my-8 px-8 py-3">
               PROCEED TO CHECKOUT
             </button>
           </div>

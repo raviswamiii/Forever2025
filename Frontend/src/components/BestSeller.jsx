@@ -16,15 +16,14 @@ export const BestSeller = () => {
 
   return (
     <div className="mt-16">
-      <div className="flex flex-col gap-2 mb-8 items-center text-3xl">
+      <div className="flex flex-col mb-8 items-center text-2xl">
         <Title text1={"BEST"} text2={"SELLER"} />
-        <p className="text-gray-600 font-medium text-base">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur,
-          repellendus.
+        <p className="m-auto text-xs sm:text-sm md:text-base text-gray-600">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit.
         </p>
       </div>
 
-      <div className="grid grid-cols-5 gap-x-4 gap-y-6">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 gap-y-6">
         {bestSeller.map((item, index) => {
           return (
             <ProductItem

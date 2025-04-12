@@ -47,7 +47,7 @@ export const Sort = ({ applyFilter }) => {
     <div>
       <select
         onChange={(e) => setSortType(e.target.value)}
-        className="border-2 outline-none text-sm px-4 py-3"
+        className="border-2 border-gray-300 text-sm px-2  py-1"
       >
         <option value="relavant">Sort by: Relavant</option>
         <option value="low-high">Sort by: Low to High</option>

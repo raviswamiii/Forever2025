@@ -21,11 +21,11 @@ export const RelatedProducts = ({ category, subCategory }) => {
   }, [category, subCategory]);
 
   return (
-    <div className="mt-20 flex flex-col items-center ">
-      <div className="text-3xl mb-5">
+    <div className="mt-20 sm:flex flex-col items-center ">
+      <div className="text-2xl mb-5">
         <Title text1={"RELATED"} text2={"PRODUCTS"} />
       </div>
-      <div className="grid grid-cols-5 gap-x-4 gap-y-6">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 gap-y-6">
         {relatedProducts.map((item, index) => {
           return (
             <ProductItem

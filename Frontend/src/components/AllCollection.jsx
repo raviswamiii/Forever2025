@@ -7,13 +7,13 @@ import { ShopContext } from "../context/ShopContext";
 export const AllCollection = ({applyFilter}) => {
   const {filteredProducts} = useContext(ShopContext)
   return (
-    <div>
-      <div className="text-2xl mb-3 flex justify-between items-center">
+    <div className="pt-2">
+      <div className="sm:text-2xl mb-3 flex justify-between items-center">
         <Title text1={"ALL"} text2={"COLLECTION"} />
         <Sort filteredProducts={filteredProducts} applyFilter={applyFilter} />
       </div>
 
-      <div className="grid grid-cols-4 gap-x-4 gap-y-6">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6">
         {filteredProducts.map((item, index) => {
           return (
             <ProductItem

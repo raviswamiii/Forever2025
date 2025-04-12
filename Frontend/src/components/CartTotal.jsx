@@ -7,7 +7,7 @@ export const CartTotal = () => {
   const { currency, delivery_fee, getCartAmount } = useContext(ShopContext);
   return (
     <div className="w-full">
-      <div className="text-2xl mb-5">
+      <div className="text-xl mb-5">
         <Title text1={"CART"} text2={"TOTAL"} />
       </div>
       <div>

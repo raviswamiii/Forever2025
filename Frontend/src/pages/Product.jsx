@@ -7,14 +7,16 @@ import { useParams } from "react-router-dom";
 export const Product = () => {
   const [productData, setProductData] = useState();
   const [size, setSize] = useState();
+  const [image, setImage] = useState("");
   const {productId} = useParams()
   const { currency, addToCart, products } = useContext(ShopContext);
-  const allProducts = products;
 
   const fetchProductData = () => {
-    allProducts.map((item) => {
+    products.map((item) => {
       if (item._id === productId) {
         setProductData(item);
+        setImage(item.image[0]);
+        return null;
       }
     });
   };
@@ -24,17 +26,17 @@ export const Product = () => {
   }, [productId, products]);
   return productData ? (
     <div className="border-t pt-10">
-      <div className="flex gap-11 ">
-        <div className="flex gap-3 ">
-          <div className="flex flex-col gap-3">
+      <div className="flex gap-11 flex-col sm:flex-row">
+        <div className="flex gap-3 h-full flex-col-reverse sm:flex-row">
+          <div className="flex sm:flex-col sm:gap-3 gap-1">
             {productData.image.map((item, index) => (
-              <img key={index} className="h-[8vw]" src={item} alt="" />
+              <img onClick={()=> setImage(item)} key={index} className="sm:h-[8vw] w-[24%] sm:w-[8vw] cursor-pointer" src={item} alt="" />
             ))}
           </div>
-          <img src={productData.image[0]} alt="" />
+          <img className="sm:h-[35vw] h-auto w-full" src={image} alt="" />
         </div>
 
-        <div className="w-1/2">
+        <div className="sm:w-1/2">
           <h1 className="text-2xl font-medium">{productData.name}</h1>
           <div className="flex gap-1 items-center">
             <img className="h-3" src={assets.star_icon} alt="" />
@@ -49,9 +51,7 @@ export const Product = () => {
             {productData.price}
           </p>
           <p className="text-gray-500">
-            A lightweight, usually knitted, pullover shirt, close-fitting and
-            with a round neckline and short sleeves, worn as an undershirt or
-            outer garment.
+           {productData.description}
           </p>
           <div className=" my-4">
             <p className="mb-4">Select Size</p>
@@ -71,7 +71,7 @@ export const Product = () => {
               })}
             </div>
           </div>
-          <button onClick={()=>addToCart(productData._id, size)} className="bg-black text-white px-7 py-3 text-sm w-[11vw] mt-4 mb-8 active:bg-gray-700">
+          <button onClick={()=>addToCart(productData._id, size)} className="bg-black text-white px-8 py-3 text-sm active:bg-gray-700 mb-8">
             ADD TO CART
           </button>
           <div className="text-sm text-gray-500 flex flex-col gap-1 pt-5 border-t">

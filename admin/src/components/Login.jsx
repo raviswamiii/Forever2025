@@ -23,17 +23,21 @@ export const Login = ({setToken}) => {
         }
     }
   return (
-    <div className="flex flex-col justify-center items-center h-screen bg-gray-50">
-      <form onSubmit={onSubmitHandler} className="border px-8 py-6 w-[26%] rounded-md bg-white shadow-md">
-        <h1 className="text-2xl font-bold mb-4">Admin Panel</h1>
-        <div className="text-sm flex flex-col gap-2 text-gray-700 font-medium">
-          <p>Email Address</p>
-          <input onChange={(e)=>setEmail(e.target.value)} value={email} className="border px-3 py-2 rounded-md text-base" type="email" placeholder="your@email.com" required/>
-          <p>Password</p>
-          <input onChange={(e)=>setPassword(e.target.value)} value={password} className="border px-3 py-2 rounded-md text-base" type="password" placeholder="Enter your password" required/>
+    <div className='min-h-screen flex items-center justify-center sm:w-full'>
+        <div className='bg-white shadow-md rounded-lg px-8 py-6 max-w-md'>
+            <h1 className='text-2xl font-bold mb-4'>Admin Panel</h1>
+            <form onSubmit={onSubmitHandler}>
+                <div className='mb-3 min-w-72'>
+                    <p className='text-sm font-medium text-gray-700 mb-2'>Email Address</p>
+                    <input onChange={(e)=>setEmail(e.target.value)} value={email} className='rounded-md w-full px-3 py-2 border border-gray-300 ouline-none' type="email" placeholder='your@email.com' required />
+                </div>
+                <div className='mb-3 min-w-72'>
+                    <p className='text-sm font-medium text-gray-700 mb-2'>Password</p>
+                    <input onChange={(e)=>setPassword(e.target.value)} value={password} className='rounded-md w-full px-3 py-2 border border-gray-300 ouline-none' type="password" placeholder='Enter your password' required />
+                </div>
+                <button className='mt-2 w-full py-2 px-4 rounded-md text-white bg-black' type='submit'>Login</button>
+            </form>
         </div>
-        <button className="border text-white bg-black mt-5 rounded-md w-full py-2" type="submit">Login</button>
-      </form>
     </div>
   );
 };

@@ -11,16 +11,16 @@ export const LatestCollection = () => {
     setLatestProducts(products.slice(0, 10));
   }, [products]);
   return (
-    <div className="mt-16">
-      <div className="flex flex-col gap-2 items-center mb-8 text-3xl">
+    <div className="mt-10">
+      <div className="text-center py-8 text-2xl flex flex-col justify-center items-center">
         <Title text1={"LATEST"} text2={"COLLECTION"} />
-        <p className="text-gray-600 font-medium text-base">
+        <p className="w-3/4 m-auto text-xs sm:text-sm md:text-base text-gray-600">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi,
           autem?
         </p>
       </div>
 
-      <div className="grid grid-cols-5 gap-x-4 gap-y-6">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 gap-y-6">
         {latestProducts.map((item, index) => {
           return (
             <ProductItem

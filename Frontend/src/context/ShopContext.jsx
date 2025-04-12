@@ -14,6 +14,7 @@ export const ShopContextProvider = (props) => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [visible, setVisible] = useState(false);
   const [search, setSearch] = useState("");
+  const [showSearchBar, setShowSearchBar] = useState(false)
   const [cartItems, setCartItems] = useState([]);
   const [products, setProducts] = useState([]);
   const [token, setToken] = useState('')
@@ -138,6 +139,8 @@ export const ShopContextProvider = (props) => {
     setVisible,
     search,
     setSearch,
+    showSearchBar,
+    setShowSearchBar,
     addToCart,
     cartItems,
     setCartItems,

@@ -53,59 +53,63 @@ export const Login = () => {
     }
   }, [token]);
   return (
-    <div className="flex flex-col items-center justify-center h-[80vh]">
-      <div className="flex items-center gap-2 mb-5">
-        <h1 className="prata-regular text-3xl">{currentState}</h1>
-        <p className="bg-black w-10 h-[2px]"></p>
+    <form
+      onSubmit={onSubmitHandler}
+      className="flex flex-col items-center w-[90%] sm:max-w-96 m-auto mt-14 gap-4 text-gray-800"
+    >
+      <div className="inline-flex items-center gap-2 mb-2 mt-10">
+        <p className="prata-regular text-3xl">{currentState}</p>
+        <hr className="border-none h-[1.5px] w-8 bg-gray-800" />
       </div>
-      <form
-        onSubmit={onSubmitHandler}
-        className="flex flex-col justify-center items-center"
-      >
+      {currentState === "Login" ? (
+        ""
+      ) : (
+        <input
+          onChange={(e) => setName(e.target.value)}
+          value={name}
+          className="w-full px-3 py-2 border border-gray-800"
+          type="text"
+          placeholder="Name"
+          required
+        />
+      )}
+      <input
+        onChange={(e) => setEmail(e.target.value)}
+        value={email}
+        className="w-full px-3 py-2 border border-gray-800"
+        type="email"
+        placeholder="Email"
+        required
+      />
+      <input
+        onChange={(e) => setPassword(e.target.value)}
+        value={password}
+        className="w-full px-3 py-2 border border-gray-800"
+        type="password"
+        placeholder="Password"
+        required
+      />
+      <div className="w-full flex justify-between text-sm mt-[-8px]">
+        <p>Forgot your password?</p>
         {currentState === "Login" ? (
-          ""
+          <p
+            onClick={() => setCurrentState("Sign Up")}
+            className="cursor-pointer"
+          >
+            Create account
+          </p>
         ) : (
-          <input
-            onChange={(e) => setName(e.target.value)}
-            value={name}
-            className="outline-none border w-[28vw] border-gray-700 px-3 py-2 mb-4"
-            type="text"
-            placeholder="Name"
-          />
+          <p
+            onClick={() => setCurrentState("Login")}
+            className="cursor-pointer"
+          >
+            Login Here
+          </p>
         )}
-        <input
-          onChange={(e) => setEmail(e.target.value)}
-          value={email}
-          className="outline-none border w-[28vw] border-gray-700 px-3 py-2 mb-4"
-          type="email"
-          placeholder="Email"
-        />
-        <input
-          onChange={(e) => setPassword(e.target.value)}
-          value={password}
-          className="outline-none border w-[28vw] border-gray-700 px-3 py-2"
-          type="password"
-          placeholder="Password"
-        />
-        <div className="flex text-sm justify-between w-[28vw] pt-2 text-gray-800">
-          <p className="cursor-pointer">Forgot your password?</p>
-
-          <div className="cursor-pointer">
-            {currentState === "Sign Up" ? (
-              <p onClick={() => setCurrentState("Login")}>Login here</p>
-            ) : (
-              <p onClick={() => setCurrentState("Sign Up")}>Create account</p>
-            )}
-          </div>
-        </div>
-
-        <button
-          type="submit"
-          className="bg-black text-white px-5 py-3 text-sm w-[10vw] mt-10"
-        >
-          {currentState === "Sign Up" ? "Sing Up" : "Sign in"}
-        </button>
-      </form>
-    </div>
+      </div>
+      <button className="bg-black text-white font-light px-8 py-2 mt-4">
+        {currentState === "Login" ? "Sign In" : "Sign Up"}
+      </button>
+    </form>
   );
 };
